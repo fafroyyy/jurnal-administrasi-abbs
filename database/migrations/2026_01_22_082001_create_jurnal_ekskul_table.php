@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('jurnal_ekskul', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('guru_id')->constrained('users');
-            $table->foreignId('ekskul_id')->constrained('master_ekskul');
+            $table->unsignedBigInteger('guru_id');
+            $table->unsignedBigInteger('ekskul_id');
             $table->date('tanggal');
             $table->string('materi');
             $table->json('absensi'); // {siswa_id: status}

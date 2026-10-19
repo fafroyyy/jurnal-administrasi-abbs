@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (!Schema::hasTable('master_mapel')) {
-            Schema::create('master_mapel', function (Blueprint $table) {
+        if (!Schema::hasTable('master_mapels')) {
+            Schema::create('master_mapels', function (Blueprint $table) {
                 $table->id();
                 $table->string('nama_mapel');
                 $table->string('kode_mapel', 10)->unique();
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('master_mapel');
+        Schema::dropIfExists('master_mapels');
     }
 };

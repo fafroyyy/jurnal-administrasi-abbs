@@ -11,6 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (!Schema::hasTable('master_kelas') || Schema::hasColumn('master_kelas', 'jurusan')) {
+            return;
+        }
+
         Schema::table('master_kelas', function (Blueprint $table) {
             $table->string('jurusan')->default('IPA');
         });

@@ -8,28 +8,19 @@ return new class extends Migration
 {
     public function up(): void
     {
-        // Drop existing foreign key constraint
         Schema::table('jurnal_kbm', function (Blueprint $table) {
-            $table->dropForeign(['mapel_id']);
-        });
-
-        // Recreate with cascading delete
-        Schema::table('jurnal_kbm', function (Blueprint $table) {
-            $table->foreign('mapel_id')
-                ->references('id')
-                ->on('master_mapels')
-                ->onDelete('cascade');
+            $table->foreign('guru_id')->references('id')->on('users');
+            $table->foreign('kelas_id')->references('id')->on('master_kelas');
+            $table->foreign('mapel_id')->references('id')->on('master_mapels')->onDelete('cascade');
         });
     }
 
     public function down(): void
     {
         Schema::table('jurnal_kbm', function (Blueprint $table) {
+            $table->dropForeign(['guru_id']);
+            $table->dropForeign(['kelas_id']);
             $table->dropForeign(['mapel_id']);
-        });
-
-        Schema::table('jurnal_kbm', function (Blueprint $table) {
-            $table->foreign('mapel_id')->references('id')->on('master_mapels');
         });
     }
 };

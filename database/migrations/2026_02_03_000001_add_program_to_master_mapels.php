@@ -10,7 +10,11 @@ return new class extends Migration
     {
         if (Schema::hasTable('master_mapels') && !Schema::hasColumn('master_mapels', 'program')) {
             Schema::table('master_mapels', function (Blueprint $table) {
-                $table->string('program')->nullable()->after('jenjang')->comment('Cambridge, ICT, Tahfidz, Semua');
+                if (!Schema::hasColumn('master_mapels', 'jenjang')) {
+                    $table->string('jenjang')->nullable()->comment('Jenjang: X, XI, XII');
+                }
+
+                $table->string('program')->nullable()->comment('Cambridge, ICT, Tahfidz, Semua');
             });
         }
     }
